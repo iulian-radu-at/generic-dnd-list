@@ -1,0 +1,76 @@
+{
+  "name": "generic-dnd-list",
+  "version": "1.0.0",
+  "description": "A DnD list with a custom renderer for its items.",
+  "main": "lib/index.js",
+  "sideEffects": false,
+  "scripts": {
+    "build": "rimraf ./lib && tsc",
+    "deploy": "cross-env NODE_ENV=production npm run build && npm publish",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "storybook": "start-storybook -c storybook",
+    "build-storybook": "build-storybook -c storybook -o docs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/iulian-radu-at/generic-dnd-list.git"
+  },
+  "files": [
+    "lib",
+    "index.d.ts"
+  ],
+  "keywords": [
+    "img",
+    "dnd list",
+    "generic-dnd-list",
+    "react",
+    "react-component",
+    "ui"
+  ],
+  "author": "Iulian Radu <iulian.radu@gmx.at>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/iulian-radu-at/generic-dnd-list/issues"
+  },
+  "homepage": "https://github.com/iulian-radu-at/generic-dnd-list#readme",
+  "dependencies": {
+    "react-beautiful-dnd": "^11.0.5"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.6.0",
+    "@storybook/react": "^5.1.11",
+    "@types/babel-core": "^6.25.6",
+    "@types/enzyme": "^3.10.3",
+    "@types/enzyme-adapter-react-16": "^1.0.5",
+    "@types/react": "^16.9.2",
+    "@types/react-beautiful-dnd": "^11.0.3",
+    "@types/react-dom": "^16.9.0",
+    "@types/rimraf": "^2.0.2",
+    "@types/storybook__react": "^4.0.2",
+    "babel-core": "^6.26.3",
+    "babel-jest": "^24.9.0",
+    "babel-loader": "^8.0.6",
+    "cross-env": "^5.2.1",
+    "enzyme": "^3.10.0",
+    "enzyme-adapter-react-16": "^1.14.0",
+    "rimraf": "^3.0.0",
+    "typescript": "^3.6.2"
+  },
+  "peerDependencies": {
+    "react": ">=16.8.0",
+    "react-dom": ">=16.8.0"
+  },
+  "jest": {
+    "modulePathIgnorePatterns": [
+      "./node_modules",
+      "./history"
+    ],
+    "transform": {
+      "^.+\\.js$": "babel-jest"
+    },
+    "testRegex": "src/*(/(__tests?__/)([^_].*/)*?[^_][^/]*?\\.(test|spec)?\\.(js?))$",
+    "setupFiles": [
+      "./enzymeAdapter.setup.js"
+    ]
+  }
+}
