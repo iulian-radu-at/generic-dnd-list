@@ -20,6 +20,7 @@ The component accepts the props defined bellow in the table.
 | getItemStyle | (isDragging: boolean) => CSSProperties        | no       | undefined | It returns the style for an item in the list |
 | getListStyle | (isDraggingOver: boolean) => CSSProperties    | no       | undefined | It returns the style for the list            |
 | items        | unknown[]                                     | yes      | -         | The items rendered                           |
+| onReorder    | (items: unknown[]) => void                    | yes      | -         | It is called when the items are reordered    |
 | renderItem   | (item: unknown, index: number) => JSX.Element | yes      | -         | Render an item                               |
 
 An undefined item can be used to signal the add new item. There should be at most one undefined item. 

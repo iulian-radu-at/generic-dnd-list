@@ -44,6 +44,7 @@ interface GenericDndListProps extends React.Props<any> {
   getItemStyle?: (isDragging: boolean) => React.CSSProperties;
   getListStyle?: (isDraggingOver: boolean) => React.CSSProperties;
   items: unknown[];
+  onReorder: (items: unknown[]) => void;
   renderItem: (item: unknown, index: number) => JSX.Element;
 }
 
@@ -52,9 +53,14 @@ const GenericDndList: React.FC<GenericDndListProps> = ({
   getItemStyle,
   getListStyle,
   items: defaultItems,
+  onReorder,
   renderItem
 }) => {
-  const [items, setItems] = React.useState<unknown[]>(defaultItems);
+  const [items, setItems] = React.useState<unknown[]>([]);
+
+  React.useEffect(() => {
+    setItems(defaultItems);
+  }, [defaultItems]);
 
   const onDragEnd = (result: DropResult) => {
     if (!result.destination) {
@@ -63,6 +69,7 @@ const GenericDndList: React.FC<GenericDndListProps> = ({
 
     const newItems = reorder(items, result.source.index, result.destination.index);
     setItems(newItems);
+    onReorder(newItems);
   };
 
   return (

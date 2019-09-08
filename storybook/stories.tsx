@@ -28,26 +28,34 @@ const getFixWidthListStyle = (isDraggingOver: boolean): React.CSSProperties => (
   width: 250
 });
 
+const handleReorder = (items: unknown[]) => console.log({ items });
+
 storiesOf('GenericDndList', module)
   .addParameters({ options: { showPanel: false } })
   .add('without add new item slot', () => (
     <div>
-      <GenericDndList items={items} getId={getId} renderItem={renderItem} />
+      <GenericDndList items={items} getId={getId} renderItem={renderItem} onReorder={handleReorder} />
     </div>
   ))
   .add('with add new item at top', () => (
     <div>
-      <GenericDndList items={itemsAddAtTop} getId={getId} renderItem={renderItem} />
+      <GenericDndList items={itemsAddAtTop} getId={getId} renderItem={renderItem} onReorder={handleReorder} />
     </div>
   ))
   .add('with add new item at end', () => (
     <div>
-      <GenericDndList items={itemsAddAtBottom} getId={getId} renderItem={renderItem} />
+      <GenericDndList items={itemsAddAtBottom} getId={getId} renderItem={renderItem} onReorder={handleReorder} />
     </div>
   ))
   .add('with fixed width', () => (
     <div>
-      <GenericDndList items={items} getId={getId} renderItem={renderItem} getListStyle={getFixWidthListStyle} />
+      <GenericDndList
+        items={items}
+        getId={getId}
+        renderItem={renderItem}
+        getListStyle={getFixWidthListStyle}
+        onReorder={handleReorder}
+      />
     </div>
   ))
   .add('styled', () => (
@@ -58,6 +66,7 @@ storiesOf('GenericDndList', module)
         renderItem={renderItem}
         getItemStyle={getItemStyle}
         getListStyle={getListStyle}
+        onReorder={handleReorder}
       />
     </div>
   ));

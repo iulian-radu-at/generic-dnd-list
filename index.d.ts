@@ -5,6 +5,7 @@ export interface GenericDndListProps extends React.Props<GenericDndList> {
   getItemStyle?: (isDragging: boolean) => React.CSSProperties;
   getListStyle?: (isDraggingOver: boolean) => React.CSSProperties;
   items: unknown[];
+  onReorder: (items: unknown[]) => void;
   renderItem: (item: unknown | undefined, index: number) => JSX.Element;
 }
 
