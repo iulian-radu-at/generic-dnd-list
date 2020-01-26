@@ -1,6 +1,6 @@
 {
   "name": "generic-dnd-list",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "A DnD list with a custom renderer for its items.",
   "main": "lib/index.js",
   "sideEffects": false,
@@ -34,34 +34,34 @@
   },
   "homepage": "https://github.com/iulian-radu-at/generic-dnd-list#readme",
   "dependencies": {
-    "react-beautiful-dnd": "^11.0.5"
+    "react-beautiful-dnd": "^12.2.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.6.0",
-    "@storybook/react": "^5.1.11",
+    "@babel/core": "^7.8.3",
+    "@storybook/react": "^5.3.9",
     "@types/babel-core": "^6.25.6",
-    "@types/enzyme": "^3.10.3",
+    "@types/enzyme": "^3.10.4",
     "@types/enzyme-adapter-react-16": "^1.0.5",
-    "@types/node": "^12.7.4",
-    "@types/react": "16.8.5",
-    "@types/react-beautiful-dnd": "^11.0.3",
-    "@types/react-dom": "16.8.5",
-    "@types/rimraf": "^2.0.2",
-    "@types/storybook__react": "^4.0.2",
+    "@types/node": "^13.5.0",
+    "@types/react": "^16.9.19",
+    "@types/react-beautiful-dnd": "^11.0.4",
+    "@types/react-dom": "^16.9.5",
+    "@types/rimraf": "^2.0.3",
     "babel-core": "^6.26.3",
-    "babel-jest": "^24.9.0",
+    "babel-jest": "^25.1.0",
     "babel-loader": "^8.0.6",
-    "cross-env": "^5.2.1",
-    "enzyme": "^3.10.0",
-    "enzyme-adapter-react-16": "^1.14.0",
-    "react": "16.8.5",
-    "react-dom": "16.8.5",
+    "babel-preset-react-app": "^9.1.0",
+    "cross-env": "^7.0.0",
+    "enzyme": "^3.11.0",
+    "enzyme-adapter-react-16": "^1.15.2",
+    "react": "16.9.0",
+    "react-dom": "16.9.0",
     "rimraf": "^3.0.0",
-    "typescript": "^3.6.2"
+    "typescript": "^3.7.5"
   },
   "peerDependencies": {
-    "react": "^16.8.5",
-    "react-dom": "^16.8.5"
+    "react": "^16.9.0",
+    "react-dom": "^16.9.0"
   },
   "jest": {
     "modulePathIgnorePatterns": [

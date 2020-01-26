@@ -32,6 +32,7 @@ An undefined item can be used to signal the add new item. There should be at mos
 | GenericDndList _uses_ | react-beautiful-dnd | React  |
 |----------------------:|:-------------------:|:------:|
 |                 1.0.x |       11.0.5        | 16.8.5 |
+|                 1.1.x |       12.2.0        | 16.9.0 |
 
 ### About versioning schema used for GenericDndList
 
@@ -93,3 +94,7 @@ export default App;
 ### 1.0.0
 
 - generic-dnd-list is made publicly available
+
+### 1.1.0
+
+- Updated packages
