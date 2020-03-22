@@ -15,7 +15,7 @@ The component accepts the props defined bellow in the table.
 ### Props accepted by GenericDndList
 
 | Name         | Type                                          | Required | Default   | Description                                  |
-|--------------|-----------------------------------------------|----------|-----------|----------------------------------------------|
+| ------------ | --------------------------------------------- | -------- | --------- | -------------------------------------------- |
 | getId        | (item: unknown) => string                     | yes      | -         | It returns a unique ID for each item         |
 | getItemStyle | (isDragging: boolean) => CSSProperties        | no       | undefined | It returns the style for an item in the list |
 | getListStyle | (isDraggingOver: boolean) => CSSProperties    | no       | undefined | It returns the style for the list            |
@@ -23,14 +23,14 @@ The component accepts the props defined bellow in the table.
 | onReorder    | (items: unknown[]) => void                    | yes      | -         | It is called when the items are reordered    |
 | renderItem   | (item: unknown, index: number) => JSX.Element | yes      | -         | Render an item                               |
 
-An undefined item can be used to signal the add new item. There should be at most one undefined item. 
+An undefined item can be used to signal the add new item. There should be at most one undefined item.
 
 ---
 
 ## Versions
 
 | GenericDndList _uses_ | react-beautiful-dnd | React  |
-|----------------------:|:-------------------:|:------:|
+| --------------------: | :-----------------: | :----: |
 |                 1.0.x |       11.0.5        | 16.8.5 |
 |                 1.1.x |       12.2.0        | 16.9.0 |
 
@@ -98,3 +98,8 @@ export default App;
 ### 1.1.0
 
 - Updated packages
+
+### 1.1.1
+
+- Updated packages
+- Moved from npm to yarn
