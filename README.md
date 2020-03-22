@@ -1,4 +1,4 @@
-# generic-dnd-list
+# generic-dnd-list ![Weekly downloads](https://img.shields.io/npm/dw/generic-dnd-list "Weekly downloads")
 
 A DnD list with a custom renderer for its items.
 
