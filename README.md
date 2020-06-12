@@ -33,6 +33,7 @@ An undefined item can be used to signal the add new item. There should be at mos
 | --------------------: | :-----------------: | :----: |
 |                 1.0.x |       11.0.5        | 16.8.5 |
 |                 1.1.x |       12.2.0        | 16.9.0 |
+|                 1.2.x |       13.0.0        | 16.9.0 |
 
 ### About versioning schema used for GenericDndList
 
@@ -103,3 +104,7 @@ export default App;
 
 - Updated packages
 - Moved from npm to yarn
+
+### 1.2.0
+
+- Updated packages
