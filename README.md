@@ -64,7 +64,7 @@ const items: (ListItem | undefined)[] = [ {
     text: 'Orange'
   }, {
     id: 'fruit-3',
-    text. 'Banana'
+    text: 'Banana'
   }, undefined];
 
 class App extends React.Component {
@@ -75,6 +75,7 @@ class App extends React.Component {
           items={items as unknown[]}
           getId={this.getId}
           renderItem={this.renderItem}
+          onReorder={this.handleReorder}
         />
       </div>
     );
@@ -83,6 +84,8 @@ class App extends React.Component {
   private getId = (item: unknown) => (item ? item.id : 'new-fruit');
 
   private renderItem = (item?: unknown) => (item ? <div>{item.text}</div> : <div>Use this to add a new fruit</div>);
+
+  private handleReorder = (items: unknown[]) => {}
 }
 
 export default App;
