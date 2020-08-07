@@ -1,1 +1,1 @@
-export * from './GenericDndList';
+export { default } from "./GenericDndList";
