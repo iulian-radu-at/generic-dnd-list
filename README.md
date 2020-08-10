@@ -1,4 +1,4 @@
-# generic-dnd-list ![Weekly downloads](https://img.shields.io/npm/dw/generic-dnd-list "Weekly downloads")
+# generic-dnd-list ![Weekly downloads](https://img.shields.io/npm/dw/generic-dnd-list 'Weekly downloads')
 
 A DnD list with a custom renderer for its items.
 
@@ -14,14 +14,16 @@ The component accepts the props defined bellow in the table.
 
 ### Props accepted by GenericDndList
 
-| Name         | Type                                          | Required | Default   | Description                                  |
-| ------------ | --------------------------------------------- | -------- | --------- | -------------------------------------------- |
-| getId        | (item: unknown) => string                     | yes      | -         | It returns a unique ID for each item         |
-| getItemStyle | (isDragging: boolean) => CSSProperties        | no       | undefined | It returns the style for an item in the list |
-| getListStyle | (isDraggingOver: boolean) => CSSProperties    | no       | undefined | It returns the style for the list            |
-| items        | unknown[]                                     | yes      | -         | The items rendered                           |
-| onReorder    | (items: unknown[]) => void                    | yes      | -         | It is called when the items are reordered    |
-| renderItem   | (item: unknown, index: number) => JSX.Element | yes      | -         | Render an item                               |
+| Name             | Type                                          | Required | Default   | Description                                      |
+| ---------------- | --------------------------------------------- | -------- | --------- | ------------------------------------------------ |
+| getId            | (item: unknown) => string                     | yes      | -         | It returns a unique ID for each item             |
+| getItemClassName | (isDragging: boolean) => string               | no       | undefined | It returns the className for an item in the list |
+| getItemStyle     | (isDragging: boolean) => CSSProperties        | no       | undefined | It returns the style for an item in the list     |
+| getListClassName | (isDraggingOver: boolean) => string           | no       | undefined | It returns the className for the list            |
+| getListStyle     | (isDraggingOver: boolean) => CSSProperties    | no       | undefined | It returns the style for the list                |
+| items            | unknown[]                                     | yes      | -         | The items rendered                               |
+| onReorder        | (items: unknown[]) => void                    | yes      | -         | It is called when the items are reordered        |
+| renderItem       | (item: unknown, index: number) => JSX.Element | yes      | -         | Render an item                                   |
 
 An undefined item can be used to signal the add new item. There should be at most one undefined item.
 
@@ -119,3 +121,7 @@ export default App;
 ### 1.2.2
 
 - Fixed crash produced by "export \* from"
+
+### 1.2.3
+
+- Added two new props: getItemClassName and getListClassName
