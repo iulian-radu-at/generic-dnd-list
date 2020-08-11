@@ -129,3 +129,7 @@ export default App;
 ### 1.2.4
 
 - Made GenericDndList generic
+
+### 1.2.5
+
+- Fixed GenericDndList definition in index.d.ts
