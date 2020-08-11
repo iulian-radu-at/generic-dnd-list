@@ -8,7 +8,7 @@ import {
   NotDraggingStyle,
 } from 'react-beautiful-dnd';
 
-const reorder = (list: unknown[], startIndex: number, endIndex: number): unknown[] => {
+const reorder = <T extends any>(list: (T | undefined)[], startIndex: number, endIndex: number): (T | undefined)[] => {
   const result = Array.from(list);
   const [removed] = result.splice(startIndex, 1);
   result.splice(endIndex, 0, removed);
@@ -39,28 +39,29 @@ const getDefaultListStyle = (
   ...(getListStyle ? getListStyle(isDraggingOver) : {}),
 });
 
-interface GenericDndListProps extends React.Props<any> {
-  getId: (item: unknown) => string;
+interface GenericDndListProps<T> extends React.Props<any> {
+  getId: (item: T | undefined) => string;
   getItemClassName?: (isDragging: boolean) => string;
   getItemStyle?: (isDragging: boolean) => React.CSSProperties;
   getListClassName?: (isDraggingOver: boolean) => string;
   getListStyle?: (isDraggingOver: boolean) => React.CSSProperties;
-  items: unknown[];
-  onReorder: (items: unknown[]) => void;
-  renderItem: (item: unknown, index: number) => JSX.Element;
+  items: (T | undefined)[];
+  onReorder: (items: (T | undefined)[]) => void;
+  renderItem: (item: T | undefined, index: number) => JSX.Element;
 }
 
-const GenericDndList: React.FC<GenericDndListProps> = ({
-  getId,
-  getItemClassName,
-  getItemStyle,
-  getListClassName,
-  getListStyle,
-  items: defaultItems,
-  onReorder,
-  renderItem,
-}) => {
-  const [items, setItems] = React.useState<unknown[]>([]);
+const GenericDndList = <T extends any = any>(props: GenericDndListProps<T>) => {
+  const {
+    getId,
+    getItemClassName,
+    getItemStyle,
+    getListClassName,
+    getListStyle,
+    items: defaultItems,
+    onReorder,
+    renderItem,
+  } = props;
+  const [items, setItems] = React.useState<(T | undefined)[]>([]);
 
   React.useEffect(() => {
     setItems(defaultItems);

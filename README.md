@@ -125,3 +125,7 @@ export default App;
 ### 1.2.3
 
 - Added two new props: getItemClassName and getListClassName
+
+### 1.2.4
+
+- Made GenericDndList generic
