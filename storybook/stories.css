@@ -1,0 +1,23 @@
+.item {
+  padding: 10px;
+  margin: 0 0 5px 0;
+  background-color: #00ffff;
+  color: #000000;
+}
+
+.itemDragging {
+  padding: 10px;
+  margin: 0 0 5px 0;
+  background-color: #ffff00;
+  color: #cccccc;
+}
+
+.list {
+  background-color: #88eeee;
+  padding: 5px;
+}
+
+.listDragging {
+  background-color: #cccc00;
+  padding: 5px;
+}

@@ -14,18 +14,25 @@ The component accepts the props defined bellow in the table.
 
 ### Props accepted by GenericDndList
 
-| Name             | Type                                          | Required | Default   | Description                                      |
-| ---------------- | --------------------------------------------- | -------- | --------- | ------------------------------------------------ |
-| getId            | (item: unknown) => string                     | yes      | -         | It returns a unique ID for each item             |
-| getItemClassName | (isDragging: boolean) => string               | no       | undefined | It returns the className for an item in the list |
-| getItemStyle     | (isDragging: boolean) => CSSProperties        | no       | undefined | It returns the style for an item in the list     |
-| getListClassName | (isDraggingOver: boolean) => string           | no       | undefined | It returns the className for the list            |
-| getListStyle     | (isDraggingOver: boolean) => CSSProperties    | no       | undefined | It returns the style for the list                |
-| items            | unknown[]                                     | yes      | -         | The items rendered                               |
-| onReorder        | (items: unknown[]) => void                    | yes      | -         | It is called when the items are reordered        |
-| renderItem       | (item: unknown, index: number) => JSX.Element | yes      | -         | Render an item                                   |
+| Name             | Type                                                 | Required | Default    | Description                                      |
+| ---------------- | ---------------------------------------------------- | -------- | ---------- | ------------------------------------------------ |
+| getId            | (item: unknown) => string                            | yes      | -          | It returns a unique ID for each item             |
+| getItemClassName | (isDragging: boolean) => string                      | no       | undefined  | It returns the className for an item in the list |
+| getItemStyle     | ((isDragging: boolean) => CSSProperties) \| null     | no       | internal\* | It returns the style for an item in the list     |
+| getListClassName | (isDraggingOver: boolean) => string                  | no       | undefined  | It returns the className for the list            |
+| getListStyle     | ((isDraggingOver: boolean) => CSSProperties) \| null | no       | internal\* | It returns the style for the list                |
+| items            | unknown[]                                            | yes      | -          | The items rendered                               |
+| onReorder        | (items: unknown[]) => void                           | yes      | -          | It is called when the items are reordered        |
+| renderItem       | (item: unknown, index: number) => JSX.Element        | yes      | -          | Render an item                                   |
 
 An undefined item can be used to signal the add new item. There should be at most one undefined item.
+
+internal\* - an internal style is used by default
+
+### Notes
+
+Do not forget to provide null or a function returning an empty object for removing the default styling.
+The provided styles overwrite any internal styling.
 
 ---
 
@@ -36,6 +43,7 @@ An undefined item can be used to signal the add new item. There should be at mos
 |                 1.0.x |       11.0.5        | 16.8.5 |
 |                 1.1.x |       12.2.0        | 16.9.0 |
 |                 1.2.x |       13.0.0        | 16.9.0 |
+|                 2.0.x |       13.0.0        | 16.9.0 |
 
 ### About versioning schema used for GenericDndList
 
@@ -137,3 +145,7 @@ export default App;
 ### 1.2.6
 
 - Improved the definition of GenericDndList in index.d.ts
+
+### 2.0.0
+
+- The default style is no longe applied (except user-select:none for items) if a getStyle function is provided.

@@ -15,36 +15,40 @@ const reorder = <T extends any>(list: (T | undefined)[], startIndex: number, end
   return result;
 };
 
-const grid = 10;
+const PADDING = 10;
 
-const getDefaultItemStyle = (
-  isDragging: boolean,
-  getItemStyle?: (isDragging: boolean) => React.CSSProperties,
-  draggableStyle?: DraggingStyle | NotDraggingStyle
-): React.CSSProperties => ({
-  userSelect: 'none',
-  padding: grid * 2,
-  margin: `0 0 ${grid}px 0`,
-  background: isDragging ? 'lightgreen' : 'grey',
-  ...(draggableStyle ? draggableStyle : {}),
-  ...(getItemStyle ? getItemStyle(isDragging) : {}),
+const getDefaultListStyle = (isDraggingOver: boolean) => ({
+  background: isDraggingOver ? 'lightblue' : 'lightgrey',
+  padding: PADDING,
 });
 
-const getDefaultListStyle = (
+const getComputedListStyle = (
   isDraggingOver: boolean,
-  getListStyle?: (isDraggingOver: boolean) => React.CSSProperties
-) => ({
-  background: isDraggingOver ? 'lightblue' : 'lightgrey',
-  padding: grid,
-  ...(getListStyle ? getListStyle(isDraggingOver) : {}),
+  getListStyle: ((isDraggingOver: boolean) => React.CSSProperties) | null
+) => (getListStyle ? getListStyle(isDraggingOver) : {});
+
+const getDefaultItemStyle = (isDragging: boolean): React.CSSProperties => ({
+  padding: PADDING * 2,
+  margin: `0 0 ${PADDING}px 0`,
+  background: isDragging ? 'lightgreen' : 'grey',
+});
+
+const getComputedItemStyle = (
+  isDragging: boolean,
+  getItemStyle: ((isDragging: boolean) => React.CSSProperties) | null,
+  draggableStyle: DraggingStyle | NotDraggingStyle = {}
+): React.CSSProperties => ({
+  userSelect: 'none',
+  ...(getItemStyle ? getItemStyle(isDragging) : {}),
+  ...draggableStyle,
 });
 
 interface GenericDndListProps<T> extends React.Props<any> {
   getId: (item: T | undefined) => string;
   getItemClassName?: (isDragging: boolean) => string;
-  getItemStyle?: (isDragging: boolean) => React.CSSProperties;
+  getItemStyle?: ((isDragging: boolean) => React.CSSProperties) | null;
   getListClassName?: (isDraggingOver: boolean) => string;
-  getListStyle?: (isDraggingOver: boolean) => React.CSSProperties;
+  getListStyle?: ((isDraggingOver: boolean) => React.CSSProperties) | null;
   items: (T | undefined)[];
   onReorder: (items: (T | undefined)[]) => void;
   renderItem: (item: T | undefined, index: number) => JSX.Element;
@@ -54,9 +58,9 @@ const GenericDndList = <T extends any = any>(props: GenericDndListProps<T>) => {
   const {
     getId,
     getItemClassName,
-    getItemStyle,
+    getItemStyle = getDefaultItemStyle,
     getListClassName,
-    getListStyle,
+    getListStyle = getDefaultListStyle,
     items: defaultItems,
     onReorder,
     renderItem,
@@ -85,7 +89,7 @@ const GenericDndList = <T extends any = any>(props: GenericDndListProps<T>) => {
             {...provided.droppableProps}
             ref={provided.innerRef}
             className={getListClassName?.(snapshot.isDraggingOver)}
-            style={getDefaultListStyle(snapshot.isDraggingOver, getListStyle)}
+            style={getComputedListStyle(snapshot.isDraggingOver, getListStyle)}
           >
             {items.map((item, index) => (
               <Draggable key={getId(item)} draggableId={getId(item)} index={index} isDragDisabled={item === undefined}>
@@ -95,7 +99,7 @@ const GenericDndList = <T extends any = any>(props: GenericDndListProps<T>) => {
                     {...provided.draggableProps}
                     {...provided.dragHandleProps}
                     className={getItemClassName?.(snapshot.isDragging)}
-                    style={getDefaultItemStyle(snapshot.isDragging, getItemStyle, provided.draggableProps.style)}
+                    style={getComputedItemStyle(snapshot.isDragging, getItemStyle, provided.draggableProps.style)}
                   >
                     {renderItem(item, index)}
                   </div>

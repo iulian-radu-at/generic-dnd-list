@@ -1,6 +1,7 @@
-import GenericDndList from '../src/GenericDndList';
 import React from 'react';
 import { storiesOf } from '@storybook/react';
+import GenericDndList from '../src/GenericDndList';
+import './stories.css';
 
 const items: unknown[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 const itemsAddAtTop: unknown[] = [undefined, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
@@ -15,17 +16,21 @@ const grid = 5;
 const getItemStyle = (isDragging: boolean): React.CSSProperties => ({
   padding: grid * 2,
   margin: `0 0 ${grid}px 0`,
-  background: isDragging ? '#ffff00' : '#00ffff',
-  color: isDragging ? '#cccccc' : '#000000'
+  backgroundColor: isDragging ? '#ffff00' : '#00ffff',
+  color: isDragging ? '#cccccc' : '#000000',
 });
 
 const getListStyle = (isDraggingOver: boolean): React.CSSProperties => ({
-  background: isDraggingOver ? '#cccc00' : '#88eeee',
-  padding: grid
+  backgroundColor: isDraggingOver ? '#cccc00' : '#88eeee',
+  padding: grid,
 });
 
+const getItemClassName = (isDragging: boolean): string => (isDragging ? 'itemDragging' : 'item');
+
+const getListClassName = (isDragging: boolean): string => (isDragging ? 'listDragging' : 'list');
+
 const getFixWidthListStyle = (isDraggingOver: boolean): React.CSSProperties => ({
-  width: 250
+  width: 250,
 });
 
 const handleReorder = (items: unknown[]) => console.log({ items });
@@ -58,7 +63,19 @@ storiesOf('GenericDndList', module)
       />
     </div>
   ))
-  .add('styled', () => (
+  .add('styled by removing the default styles', () => (
+    <div>
+      <GenericDndList
+        items={itemsAddAtBottom}
+        getId={getId}
+        renderItem={renderItem}
+        getItemStyle={null}
+        getListStyle={null}
+        onReorder={handleReorder}
+      />
+    </div>
+  ))
+  .add('styled using style functions', () => (
     <div>
       <GenericDndList
         items={itemsAddAtBottom}
@@ -66,6 +83,20 @@ storiesOf('GenericDndList', module)
         renderItem={renderItem}
         getItemStyle={getItemStyle}
         getListStyle={getListStyle}
+        onReorder={handleReorder}
+      />
+    </div>
+  ))
+  .add('styled using className functions', () => (
+    <div>
+      <GenericDndList
+        items={itemsAddAtBottom}
+        getId={getId}
+        renderItem={renderItem}
+        getItemStyle={null}
+        getItemClassName={getItemClassName}
+        getListStyle={null}
+        getListClassName={getListClassName}
         onReorder={handleReorder}
       />
     </div>
