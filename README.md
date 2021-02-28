@@ -38,12 +38,13 @@ The provided styles overwrite any internal styling.
 
 ## Versions
 
-| GenericDndList _uses_ | react-beautiful-dnd | React  |
-| --------------------: | :-----------------: | :----: |
-|                 1.0.x |       11.0.5        | 16.8.5 |
-|                 1.1.x |       12.2.0        | 16.9.0 |
-|                 1.2.x |       13.0.0        | 16.9.0 |
-|                 2.0.x |       13.0.0        | 16.9.0 |
+| GenericDndList _uses_ | react-beautiful-dnd |      React       |
+| --------------------: | :-----------------: | :--------------: |
+|                 1.0.x |       11.0.5        |      16.8.5      |
+|                 1.1.x |       12.2.0        |      16.9.0      |
+|                 1.2.x |       13.0.0        |      16.9.0      |
+|                 2.0.x |       13.0.0        |      16.9.0      |
+|                 2.1.x |       13.0.0        | 16.9.0 or 17.0.0 |
 
 ### About versioning schema used for GenericDndList
 
@@ -149,3 +150,7 @@ export default App;
 ### 2.0.0
 
 - The default style is no longe applied (except user-select:none for items) if a getStyle function is provided.
+
+### 2.1.0
+
+- Accepting React 17 as peerDependencies
