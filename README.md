@@ -14,16 +14,20 @@ The component accepts the props defined bellow in the table.
 
 ### Props accepted by GenericDndList
 
-| Name             | Type                                                 | Required | Default    | Description                                      |
-| ---------------- | ---------------------------------------------------- | -------- | ---------- | ------------------------------------------------ |
-| getId            | (item: unknown) => string                            | yes      | -          | It returns a unique ID for each item             |
-| getItemClassName | (isDragging: boolean) => string                      | no       | undefined  | It returns the className for an item in the list |
-| getItemStyle     | ((isDragging: boolean) => CSSProperties) \| null     | no       | internal\* | It returns the style for an item in the list     |
-| getListClassName | (isDraggingOver: boolean) => string                  | no       | undefined  | It returns the className for the list            |
-| getListStyle     | ((isDraggingOver: boolean) => CSSProperties) \| null | no       | internal\* | It returns the style for the list                |
-| items            | unknown[]                                            | yes      | -          | The items rendered                               |
-| onReorder        | (items: unknown[]) => void                           | yes      | -          | It is called when the items are reordered        |
-| renderItem       | (item: unknown, index: number) => JSX.Element        | yes      | -          | Render an item                                   |
+| Name                 | Type                                                 | Required | Default    | Description                                      |
+| -------------------- | ---------------------------------------------------- | -------- | ---------- | ------------------------------------------------ |
+| getId                | (item: unknown) => string                            | yes      | -          | It returns a unique ID for each item             |
+| getItemClassName     | (isDragging: boolean) => string                      | no       | undefined  | It returns the className for an item in the list |
+| getItemStyle         | ((isDragging: boolean) => CSSProperties) \| null     | no       | internal\* | It returns the style for an item in the list     |
+| getListClassName     | (isDraggingOver: boolean) => string                  | no       | undefined  | It returns the className for the list            |
+| getListStyle         | ((isDraggingOver: boolean) => CSSProperties) \| null | no       | internal\* | It returns the style for the list                |
+| items                | unknown[]                                            | yes      | -          | The items rendered                               |
+| lockAxis             | boolean                                              | no       | false      | The dragged item keeps the direction             |
+| propsDragDropContext | DragDropContextProps                                 | no       | -          | Props passed to react-beautiful-dnd component    |
+| propsDraggable       | DraggableProps except draggableId, index             | no       | -          | Props passed to react-beautiful-dnd component    |
+| propsDroppable       | DroppableProps except direction                      | no       | -          | Props passed to react-beautiful-dnd component    |
+| onReorder            | (items: unknown[]) => void                           | yes      | -          | It is called when the items are reordered        |
+| renderItem           | (item: unknown, index: number) => JSX.Element        | yes      | -          | Render an item                                   |
 
 An undefined item can be used to signal the add new item. There should be at most one undefined item.
 
@@ -45,6 +49,7 @@ The provided styles overwrite any internal styling.
 |                 1.2.x |       13.0.0        |      16.9.0      |
 |                 2.0.x |       13.0.0        |      16.9.0      |
 |                 2.1.x |       13.0.0        | 16.9.0 or 17.0.0 |
+|                 2.2.x |       13.1.0        | 16.9.0 or 17.0.0 |
 
 ### About versioning schema used for GenericDndList
 
@@ -158,3 +163,8 @@ export default App;
 ### 2.1.1
 
 - Fixed security warnings
+
+### 2.2.0
+
+- Added the possibility to lock the moved item on the vertical axis
+- Added the possibility to pass props to react-beautiful-dnd components

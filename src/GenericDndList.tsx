@@ -1,11 +1,15 @@
 import * as React from 'react';
 import {
   DragDropContext,
+  DragDropContextProps,
   Draggable,
+  DraggableProps,
   DraggingStyle,
   Droppable,
+  DroppableProps,
   DropResult,
   NotDraggingStyle,
+  ResponderProvided,
 } from 'react-beautiful-dnd';
 
 const reorder = <T extends any>(list: (T | undefined)[], startIndex: number, endIndex: number): (T | undefined)[] => {
@@ -33,23 +37,37 @@ const getDefaultItemStyle = (isDragging: boolean): React.CSSProperties => ({
   background: isDragging ? 'lightgreen' : 'grey',
 });
 
-const getComputedItemStyle = (
+function getComputedItemStyle(
   isDragging: boolean,
   getItemStyle: ((isDragging: boolean) => React.CSSProperties) | null,
-  draggableStyle: DraggingStyle | NotDraggingStyle = {}
-): React.CSSProperties => ({
-  userSelect: 'none',
-  ...(getItemStyle ? getItemStyle(isDragging) : {}),
-  ...draggableStyle,
-});
+  draggableStyle: DraggingStyle | NotDraggingStyle = {},
+  lockAxis?: boolean
+): React.CSSProperties {
+  const style: React.CSSProperties = {
+    userSelect: 'none',
+    ...(getItemStyle?.(isDragging) ?? {}),
+    ...draggableStyle,
+  };
 
-interface GenericDndListProps<T> extends React.Props<any> {
+  const transform = (draggableStyle as DraggingStyle).transform;
+  if (lockAxis && transform) {
+    style.transform = 'translate(0px' + transform.slice(transform.indexOf(','), transform.length);
+  }
+
+  return style;
+}
+
+interface GenericDndListProps<T> {
   getId: (item: T | undefined) => string;
   getItemClassName?: (isDragging: boolean) => string;
   getItemStyle?: ((isDragging: boolean) => React.CSSProperties) | null;
   getListClassName?: (isDraggingOver: boolean) => string;
   getListStyle?: ((isDraggingOver: boolean) => React.CSSProperties) | null;
   items: (T | undefined)[];
+  lockAxis?: boolean;
+  propsDragDropContext?: Partial<DragDropContextProps>;
+  propsDraggable?: Omit<Partial<DraggableProps>, 'draggableId' | 'index'>;
+  propsDroppable?: Omit<Partial<DroppableProps>, 'direction'>;
   onReorder: (items: (T | undefined)[]) => void;
   renderItem: (item: T | undefined, index: number) => JSX.Element;
 }
@@ -62,6 +80,10 @@ const GenericDndList = <T extends any = any>(props: GenericDndListProps<T>) => {
     getListClassName,
     getListStyle = getDefaultListStyle,
     items: defaultItems,
+    lockAxis,
+    propsDragDropContext,
+    propsDraggable,
+    propsDroppable,
     onReorder,
     renderItem,
   } = props;
@@ -71,7 +93,9 @@ const GenericDndList = <T extends any = any>(props: GenericDndListProps<T>) => {
     setItems(defaultItems);
   }, [defaultItems]);
 
-  const onDragEnd = (result: DropResult) => {
+  const handleDragEnd = (result: DropResult, provided: ResponderProvided) => {
+    propsDragDropContext?.onDragEnd?.(result, provided);
+
     if (!result.destination) {
       return;
     }
@@ -82,8 +106,8 @@ const GenericDndList = <T extends any = any>(props: GenericDndListProps<T>) => {
   };
 
   return (
-    <DragDropContext onDragEnd={onDragEnd}>
-      <Droppable droppableId="droppable">
+    <DragDropContext {...propsDragDropContext} onDragEnd={handleDragEnd}>
+      <Droppable {...propsDroppable} droppableId={propsDroppable?.droppableId ?? 'droppable'}>
         {(provided, snapshot) => (
           <div
             {...provided.droppableProps}
@@ -92,14 +116,25 @@ const GenericDndList = <T extends any = any>(props: GenericDndListProps<T>) => {
             style={getComputedListStyle(snapshot.isDraggingOver, getListStyle)}
           >
             {items.map((item, index) => (
-              <Draggable key={getId(item)} draggableId={getId(item)} index={index} isDragDisabled={item === undefined}>
+              <Draggable
+                {...propsDraggable}
+                key={getId(item)}
+                draggableId={getId(item)}
+                index={index}
+                isDragDisabled={item === undefined}
+              >
                 {(provided, snapshot) => (
                   <div
                     ref={provided.innerRef}
                     {...provided.draggableProps}
                     {...provided.dragHandleProps}
                     className={getItemClassName?.(snapshot.isDragging)}
-                    style={getComputedItemStyle(snapshot.isDragging, getItemStyle, provided.draggableProps.style)}
+                    style={getComputedItemStyle(
+                      snapshot.isDragging,
+                      getItemStyle,
+                      provided.draggableProps.style,
+                      lockAxis
+                    )}
                   >
                     {renderItem(item, index)}
                   </div>

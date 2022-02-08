@@ -100,4 +100,9 @@ storiesOf('GenericDndList', module)
         onReorder={handleReorder}
       />
     </div>
+  ))
+  .add('drag axis locked', () => (
+    <div>
+      <GenericDndList items={items} getId={getId} renderItem={renderItem} onReorder={handleReorder} lockAxis />
+    </div>
   ));
