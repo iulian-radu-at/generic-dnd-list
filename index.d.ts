@@ -12,8 +12,13 @@ export interface GenericDndListProps<T = any> {
   propsDragDropContext?: Partial<DragDropContextProps>;
   propsDraggable?: Omit<Partial<DraggableProps>, 'draggableId' | 'index'>;
   propsDroppable?: Omit<Partial<DroppableProps>, 'direction'>;
-  onReorder: ((items: (T | undefined)[]) => void) | ((items: T[]) => void);
-  renderItem: ((item: T | undefined, index: number) => JSX.Element) | ((item: T, index: number) => JSX.Element);
+  onReorder: (items: (T | undefined)[]) => void;
+  renderItem: (item: T | undefined, index: number, context: RenderItemContext) => JSX.Element;
+}
+
+export interface RenderItemContext {
+  isDragging: boolean;
+  isDropAnimating: boolean;
 }
 
 declare class GenericDndList<T> extends React.Component<GenericDndListProps<T>> {}

@@ -69,7 +69,12 @@ interface GenericDndListProps<T> {
   propsDraggable?: Omit<Partial<DraggableProps>, 'draggableId' | 'index'>;
   propsDroppable?: Omit<Partial<DroppableProps>, 'direction'>;
   onReorder: (items: (T | undefined)[]) => void;
-  renderItem: (item: T | undefined, index: number) => JSX.Element;
+  renderItem: (item: T | undefined, index: number, context: RenderItemContext) => JSX.Element;
+}
+
+interface RenderItemContext {
+  isDragging: boolean;
+  isDropAnimating: boolean;
 }
 
 const GenericDndList = <T extends any = any>(props: GenericDndListProps<T>) => {
@@ -136,7 +141,10 @@ const GenericDndList = <T extends any = any>(props: GenericDndListProps<T>) => {
                       lockAxis
                     )}
                   >
-                    {renderItem(item, index)}
+                    {renderItem(item, index, {
+                      isDragging: snapshot.isDragging,
+                      isDropAnimating: snapshot.isDropAnimating,
+                    })}
                   </div>
                 )}
               </Draggable>

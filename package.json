@@ -1,6 +1,6 @@
 {
   "name": "generic-dnd-list",
-  "version": "2.2.0",
+  "version": "2.3.0",
   "description": "A DnD list with a custom renderer for its items.",
   "main": "lib/index.js",
   "sideEffects": false,

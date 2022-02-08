@@ -50,6 +50,7 @@ The provided styles overwrite any internal styling.
 |                 2.0.x |       13.0.0        |      16.9.0      |
 |                 2.1.x |       13.0.0        | 16.9.0 or 17.0.0 |
 |                 2.2.x |       13.1.0        | 16.9.0 or 17.0.0 |
+|                 2.3.x |       13.1.0        | 16.9.0 or 17.0.0 |
 
 ### About versioning schema used for GenericDndList
 
@@ -168,3 +169,7 @@ export default App;
 
 - Added the possibility to lock the moved item on the vertical axis
 - Added the possibility to pass props to react-beautiful-dnd components
+
+### 2.3.0
+
+- Added a context argument to render item function
