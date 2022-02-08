@@ -186,3 +186,7 @@ export default App;
 ### 2.3.2
 
 - Fixed the broken typedef in 2.3.0
+
+### 2.3.3
+
+- Fixed the broken typedef in 2.3.0

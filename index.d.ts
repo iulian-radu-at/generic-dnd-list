@@ -13,7 +13,9 @@ export interface GenericDndListProps<T = any> {
   propsDraggable?: Omit<Partial<DraggableProps>, 'draggableId' | 'index'>;
   propsDroppable?: Omit<Partial<DroppableProps>, 'direction'>;
   onReorder: ((items: (T | undefined)[]) => void) | ((items: T[]) => void);
-  renderItem: (item: T | undefined, index: number, context: RenderItemContext) => JSX.Element;
+  renderItem:
+    | ((item: T | undefined, index: number, context: RenderItemContext) => JSX.Element)
+    | ((item: T, index: number, context: RenderItemContext) => JSX.Element);
 }
 
 export interface RenderItemContext {
