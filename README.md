@@ -14,22 +14,27 @@ The component accepts the props defined bellow in the table.
 
 ### Props accepted by GenericDndList
 
-| Name                 | Type                                                 | Required | Default    | Description                                      |
-| -------------------- | ---------------------------------------------------- | -------- | ---------- | ------------------------------------------------ |
-| getId                | (item: unknown) => string                            | yes      | -          | It returns a unique ID for each item             |
-| getItemClassName     | (isDragging: boolean) => string                      | no       | undefined  | It returns the className for an item in the list |
-| getItemStyle         | ((isDragging: boolean) => CSSProperties) \| null     | no       | internal\* | It returns the style for an item in the list     |
-| getListClassName     | (isDraggingOver: boolean) => string                  | no       | undefined  | It returns the className for the list            |
-| getListStyle         | ((isDraggingOver: boolean) => CSSProperties) \| null | no       | internal\* | It returns the style for the list                |
-| items                | unknown[]                                            | yes      | -          | The items rendered                               |
-| lockAxis             | boolean                                              | no       | false      | The dragged item keeps the direction             |
-| propsDragDropContext | DragDropContextProps                                 | no       | -          | Props passed to react-beautiful-dnd component    |
-| propsDraggable       | DraggableProps except draggableId, index             | no       | -          | Props passed to react-beautiful-dnd component    |
-| propsDroppable       | DroppableProps except direction                      | no       | -          | Props passed to react-beautiful-dnd component    |
-| onReorder            | (items: unknown[]) => void                           | yes      | -          | It is called when the items are reordered        |
-| renderItem           | (item: unknown, index: number) => JSX.Element        | yes      | -          | Render an item                                   |
+| Name                 | Type                                                            | Required | Default    | Description                                      |
+| -------------------- | --------------------------------------------------------------- | -------- | ---------- | ------------------------------------------------ |
+| getId                | (item: unknown) => string                                       | yes      | -          | It returns a unique ID for each item             |
+| getItemClassName     | (isDragging: boolean) => string                                 | no       | undefined  | It returns the className for an item in the list |
+| getItemStyle         | ((isDragging: boolean) => CSSProperties) \| null                | no       | internal\* | It returns the style for an item in the list     |
+| getListClassName     | (isDraggingOver: boolean) => string                             | no       | undefined  | It returns the className for the list            |
+| getListStyle         | ((isDraggingOver: boolean) => CSSProperties) \| null            | no       | internal\* | It returns the style for the list                |
+| items                | unknown[]                                                       | yes      | -          | The items rendered                               |
+| lockAxis             | boolean                                                         | no       | false      | The dragged item keeps the direction             |
+| propsDragDropContext | DragDropContextProps                                            | no       | -          | Props passed to react-beautiful-dnd component    |
+| propsDraggable       | DraggableProps except draggableId, index                        | no       | -          | Props passed to react-beautiful-dnd component    |
+| propsDroppable       | DroppableProps except direction                                 | no       | -          | Props passed to react-beautiful-dnd component    |
+| onReorder            | (items: unknown[]) => void                                      | yes      | -          | It is called when the items are reordered        |
+| renderItem           | (item: unknown, index: number, context: Context) => JSX.Element | yes      | -          | Render an item                                   |
 
 An undefined item can be used to signal the add new item. There should be at most one undefined item.
+
+Context contains:
+
+- [isDragging](https://github.com/atlassian/react-beautiful-dnd/blob/master/docs/api/draggable.md)
+- [isDropAnimating](https://github.com/atlassian/react-beautiful-dnd/blob/master/docs/guides/drop-animation.md)
 
 internal\* - an internal style is used by default
 
@@ -173,3 +178,7 @@ export default App;
 ### 2.3.0
 
 - Added a context argument to render item function
+
+### 2.3.1
+
+- Improved the documentation
