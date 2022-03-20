@@ -190,3 +190,7 @@ export default App;
 ### 2.3.3
 
 - Fixed the broken typedef in 2.3.0
+
+### 2.3.4
+
+- Updated the packages
