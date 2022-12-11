@@ -200,4 +200,4 @@ export default App;
 
 - onResize prop is no longer required
 - Updated the packages
-- Minimum expected React version is 18
+- Supports minimum React 18
