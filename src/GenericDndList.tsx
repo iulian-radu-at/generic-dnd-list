@@ -12,7 +12,11 @@ import {
   ResponderProvided,
 } from 'react-beautiful-dnd';
 
-const reorder = <T extends any>(list: (T | undefined)[], startIndex: number, endIndex: number): (T | undefined)[] => {
+const reorder = <T extends any>(
+  list: (T | undefined)[],
+  startIndex: number,
+  endIndex: number
+): (T | undefined)[] => {
   const result = Array.from(list);
   const [removed] = result.splice(startIndex, 1);
   result.splice(endIndex, 0, removed);
@@ -29,7 +33,7 @@ const getDefaultListStyle = (isDraggingOver: boolean) => ({
 const getComputedListStyle = (
   isDraggingOver: boolean,
   getListStyle: ((isDraggingOver: boolean) => React.CSSProperties) | null
-) => (getListStyle ? getListStyle(isDraggingOver) : {});
+) => (getListStyle ? getListStyle(isDraggingOver) : undefined);
 
 const getDefaultItemStyle = (isDragging: boolean): React.CSSProperties => ({
   padding: PADDING * 2,
@@ -40,7 +44,7 @@ const getDefaultItemStyle = (isDragging: boolean): React.CSSProperties => ({
 function getComputedItemStyle(
   isDragging: boolean,
   getItemStyle: ((isDragging: boolean) => React.CSSProperties) | null,
-  draggableStyle: DraggingStyle | NotDraggingStyle = {},
+  draggableStyle?: DraggingStyle | NotDraggingStyle,
   lockAxis?: boolean
 ): React.CSSProperties {
   const style: React.CSSProperties = {
@@ -49,9 +53,11 @@ function getComputedItemStyle(
     ...draggableStyle,
   };
 
-  const transform = (draggableStyle as DraggingStyle).transform;
+  const transform = draggableStyle?.transform;
   if (lockAxis && transform) {
-    style.transform = 'translate(0px' + transform.slice(transform.indexOf(','), transform.length);
+    style.transform =
+      'translate(0px' +
+      transform.slice(transform.indexOf(','), transform.length);
   }
 
   return style;
@@ -68,8 +74,12 @@ interface GenericDndListProps<T> {
   propsDragDropContext?: Partial<DragDropContextProps>;
   propsDraggable?: Omit<Partial<DraggableProps>, 'draggableId' | 'index'>;
   propsDroppable?: Omit<Partial<DroppableProps>, 'direction'>;
-  onReorder: (items: (T | undefined)[]) => void;
-  renderItem: (item: T | undefined, index: number, context: RenderItemContext) => JSX.Element;
+  onReorder?: (items: (T | undefined)[]) => void;
+  renderItem: (
+    item: T | undefined,
+    index: number,
+    context: RenderItemContext
+  ) => JSX.Element;
 }
 
 interface RenderItemContext {
@@ -105,14 +115,21 @@ const GenericDndList = <T extends any = any>(props: GenericDndListProps<T>) => {
       return;
     }
 
-    const newItems = reorder(items, result.source.index, result.destination.index);
+    const newItems = reorder(
+      items,
+      result.source.index,
+      result.destination.index
+    );
     setItems(newItems);
-    onReorder(newItems);
+    onReorder?.(newItems);
   };
 
   return (
     <DragDropContext {...propsDragDropContext} onDragEnd={handleDragEnd}>
-      <Droppable {...propsDroppable} droppableId={propsDroppable?.droppableId ?? 'droppable'}>
+      <Droppable
+        {...propsDroppable}
+        droppableId={propsDroppable?.droppableId ?? 'droppable'}
+      >
         {(provided, snapshot) => (
           <div
             {...provided.droppableProps}

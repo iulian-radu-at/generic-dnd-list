@@ -26,7 +26,7 @@ The component accepts the props defined bellow in the table.
 | propsDragDropContext | DragDropContextProps                                            | no       | -          | Props passed to react-beautiful-dnd component    |
 | propsDraggable       | DraggableProps except draggableId, index                        | no       | -          | Props passed to react-beautiful-dnd component    |
 | propsDroppable       | DroppableProps except direction                                 | no       | -          | Props passed to react-beautiful-dnd component    |
-| onReorder            | (items: unknown[]) => void                                      | yes      | -          | It is called when the items are reordered        |
+| onReorder            | (items: unknown[]) => void                                      | no       | -          | It is called when the items are reordered        |
 | renderItem           | (item: unknown, index: number, context: Context) => JSX.Element | yes      | -          | Render an item                                   |
 
 An undefined item can be used to signal the add new item. There should be at most one undefined item.
@@ -56,6 +56,7 @@ The provided styles overwrite any internal styling.
 |                 2.1.x |       13.0.0        | 16.9.0 or 17.0.0 |
 |                 2.2.x |       13.1.0        | 16.9.0 or 17.0.0 |
 |                 2.3.x |       13.1.0        | 16.9.0 or 17.0.0 |
+|                 3.0.x |       13.1.1        |      18.0.0      |
 
 ### About versioning schema used for GenericDndList
 
@@ -194,3 +195,9 @@ export default App;
 ### 2.3.4
 
 - Updated the packages
+
+### 3.0.0
+
+- onResize prop is no longer required
+- Updated the packages
+- Minimum expected React version is 18

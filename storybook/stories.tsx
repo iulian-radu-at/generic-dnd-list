@@ -1,5 +1,5 @@
 import React from 'react';
-import { storiesOf } from '@storybook/react';
+import { ComponentMeta, ComponentStory, storiesOf } from '@storybook/react';
 import GenericDndList from '../src/GenericDndList';
 import './stories.css';
 
@@ -9,7 +9,8 @@ const itemsAddAtBottom: unknown[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, undefined];
 
 const getId = (item?: unknown) => (item ? `${item as number}` : 'new');
 
-const renderItem = (item?: unknown) => (item ? <div>{item as number}</div> : <div>Use this to add a new item</div>);
+const renderItem = (item?: unknown) =>
+  item ? <div>{item as number}</div> : <div>Use this to add a new item</div>;
 
 const grid = 5;
 
@@ -25,57 +26,79 @@ const getListStyle = (isDraggingOver: boolean): React.CSSProperties => ({
   padding: grid,
 });
 
-const getItemClassName = (isDragging: boolean): string => (isDragging ? 'itemDragging' : 'item');
+const getItemClassName = (isDragging: boolean): string =>
+  isDragging ? 'itemDragging' : 'item';
 
-const getListClassName = (isDragging: boolean): string => (isDragging ? 'listDragging' : 'list');
+const getListClassName = (isDragging: boolean): string =>
+  isDragging ? 'listDragging' : 'list';
 
-const getFixWidthListStyle = (isDraggingOver: boolean): React.CSSProperties => ({
+const getFixWidthListStyle = (
+  isDraggingOver: boolean
+): React.CSSProperties => ({
   width: 250,
 });
 
-const handleReorder = (items: unknown[]) => console.log({ items });
+export default {
+  title: 'GenericDndList',
+  component: GenericDndList,
+} as ComponentMeta<typeof GenericDndList>;
 
-storiesOf('GenericDndList', module)
-  .addParameters({ options: { showPanel: false } })
-  .add('without add new item slot', () => (
+export const WithoutAddNewItemSlot: ComponentStory<typeof GenericDndList> =
+  () => (
     <div>
-      <GenericDndList items={items} getId={getId} renderItem={renderItem} onReorder={handleReorder} />
+      <GenericDndList items={items} getId={getId} renderItem={renderItem} />
     </div>
-  ))
-  .add('with add new item at top', () => (
-    <div>
-      <GenericDndList items={itemsAddAtTop} getId={getId} renderItem={renderItem} onReorder={handleReorder} />
-    </div>
-  ))
-  .add('with add new item at end', () => (
-    <div>
-      <GenericDndList items={itemsAddAtBottom} getId={getId} renderItem={renderItem} onReorder={handleReorder} />
-    </div>
-  ))
-  .add('with fixed width', () => (
+  );
+
+export const WithAddNewItemAtTop: ComponentStory<typeof GenericDndList> =
+  () => (
     <div>
       <GenericDndList
-        items={items}
+        items={itemsAddAtTop}
         getId={getId}
         renderItem={renderItem}
-        getListStyle={getFixWidthListStyle}
-        onReorder={handleReorder}
       />
     </div>
-  ))
-  .add('styled by removing the default styles', () => (
+  );
+
+export const WithAddNewItemAtEnd: ComponentStory<typeof GenericDndList> =
+  () => (
     <div>
       <GenericDndList
         items={itemsAddAtBottom}
         getId={getId}
         renderItem={renderItem}
-        getItemStyle={null}
-        getListStyle={null}
-        onReorder={handleReorder}
       />
     </div>
-  ))
-  .add('styled using style functions', () => (
+  );
+
+export const WithFixedWidth: ComponentStory<typeof GenericDndList> = () => (
+  <div>
+    <GenericDndList
+      items={items}
+      getId={getId}
+      renderItem={renderItem}
+      getListStyle={getFixWidthListStyle}
+    />
+  </div>
+);
+
+export const StyledByRemovingTheDefaultStyles: ComponentStory<
+  typeof GenericDndList
+> = () => (
+  <div>
+    <GenericDndList
+      items={itemsAddAtBottom}
+      getId={getId}
+      renderItem={renderItem}
+      getItemStyle={null}
+      getListStyle={null}
+    />
+  </div>
+);
+
+export const StyledUsingStyleFunctions: ComponentStory<typeof GenericDndList> =
+  () => (
     <div>
       <GenericDndList
         items={itemsAddAtBottom}
@@ -83,26 +106,33 @@ storiesOf('GenericDndList', module)
         renderItem={renderItem}
         getItemStyle={getItemStyle}
         getListStyle={getListStyle}
-        onReorder={handleReorder}
       />
     </div>
-  ))
-  .add('styled using className functions', () => (
-    <div>
-      <GenericDndList
-        items={itemsAddAtBottom}
-        getId={getId}
-        renderItem={renderItem}
-        getItemStyle={null}
-        getItemClassName={getItemClassName}
-        getListStyle={null}
-        getListClassName={getListClassName}
-        onReorder={handleReorder}
-      />
-    </div>
-  ))
-  .add('drag axis locked', () => (
-    <div>
-      <GenericDndList items={items} getId={getId} renderItem={renderItem} onReorder={handleReorder} lockAxis />
-    </div>
-  ));
+  );
+
+export const StyledUsingClassNameFunctions: ComponentStory<
+  typeof GenericDndList
+> = () => (
+  <div>
+    <GenericDndList
+      items={itemsAddAtBottom}
+      getId={getId}
+      renderItem={renderItem}
+      getItemStyle={null}
+      getItemClassName={getItemClassName}
+      getListStyle={null}
+      getListClassName={getListClassName}
+    />
+  </div>
+);
+
+export const DragAxisLocked: ComponentStory<typeof GenericDndList> = () => (
+  <div>
+    <GenericDndList
+      items={items}
+      getId={getId}
+      renderItem={renderItem}
+      lockAxis
+    />
+  </div>
+);
