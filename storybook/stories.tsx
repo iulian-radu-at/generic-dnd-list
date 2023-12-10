@@ -1,5 +1,5 @@
+import { Meta, StoryObj } from '@storybook/react';
 import React from 'react';
-import { ComponentMeta, ComponentStory, storiesOf } from '@storybook/react';
 import GenericDndList from '../src/GenericDndList';
 import './stories.css';
 
@@ -38,41 +38,40 @@ const getFixWidthListStyle = (
   width: 250,
 });
 
-export default {
+const meta: Meta<typeof GenericDndList> = {
   title: 'GenericDndList',
   component: GenericDndList,
-} as ComponentMeta<typeof GenericDndList>;
+} as Meta<typeof GenericDndList>;
+export default meta;
+type Story = StoryObj<typeof GenericDndList>;
 
-export const WithoutAddNewItemSlot: ComponentStory<typeof GenericDndList> =
-  () => (
-    <div>
-      <GenericDndList items={items} getId={getId} renderItem={renderItem} />
-    </div>
-  );
+export const WithoutAddNewItemSlot = () => (
+  <div>
+    <GenericDndList items={items} getId={getId} renderItem={renderItem} />
+  </div>
+);
 
-export const WithAddNewItemAtTop: ComponentStory<typeof GenericDndList> =
-  () => (
-    <div>
-      <GenericDndList
-        items={itemsAddAtTop}
-        getId={getId}
-        renderItem={renderItem}
-      />
-    </div>
-  );
+export const WithAddNewItemAtTop = () => (
+  <div>
+    <GenericDndList
+      items={itemsAddAtTop}
+      getId={getId}
+      renderItem={renderItem}
+    />
+  </div>
+);
 
-export const WithAddNewItemAtEnd: ComponentStory<typeof GenericDndList> =
-  () => (
-    <div>
-      <GenericDndList
-        items={itemsAddAtBottom}
-        getId={getId}
-        renderItem={renderItem}
-      />
-    </div>
-  );
+export const WithAddNewItemAtEnd = () => (
+  <div>
+    <GenericDndList
+      items={itemsAddAtBottom}
+      getId={getId}
+      renderItem={renderItem}
+    />
+  </div>
+);
 
-export const WithFixedWidth: ComponentStory<typeof GenericDndList> = () => (
+export const WithFixedWidth = () => (
   <div>
     <GenericDndList
       items={items}
@@ -83,9 +82,7 @@ export const WithFixedWidth: ComponentStory<typeof GenericDndList> = () => (
   </div>
 );
 
-export const StyledByRemovingTheDefaultStyles: ComponentStory<
-  typeof GenericDndList
-> = () => (
+export const StyledByRemovingTheDefaultStyles = () => (
   <div>
     <GenericDndList
       items={itemsAddAtBottom}
@@ -97,22 +94,19 @@ export const StyledByRemovingTheDefaultStyles: ComponentStory<
   </div>
 );
 
-export const StyledUsingStyleFunctions: ComponentStory<typeof GenericDndList> =
-  () => (
-    <div>
-      <GenericDndList
-        items={itemsAddAtBottom}
-        getId={getId}
-        renderItem={renderItem}
-        getItemStyle={getItemStyle}
-        getListStyle={getListStyle}
-      />
-    </div>
-  );
+export const StyledUsingStyleFunctions = () => (
+  <div>
+    <GenericDndList
+      items={itemsAddAtBottom}
+      getId={getId}
+      renderItem={renderItem}
+      getItemStyle={getItemStyle}
+      getListStyle={getListStyle}
+    />
+  </div>
+);
 
-export const StyledUsingClassNameFunctions: ComponentStory<
-  typeof GenericDndList
-> = () => (
+export const StyledUsingClassNameFunctions = () => (
   <div>
     <GenericDndList
       items={itemsAddAtBottom}
@@ -126,7 +120,7 @@ export const StyledUsingClassNameFunctions: ComponentStory<
   </div>
 );
 
-export const DragAxisLocked: ComponentStory<typeof GenericDndList> = () => (
+export const DragAxisLocked = () => (
   <div>
     <GenericDndList
       items={items}
